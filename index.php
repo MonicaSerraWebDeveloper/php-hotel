@@ -59,19 +59,30 @@
             <div class="row align-items-start">
                 <div class="col">
                     <select class="form-select" name="isParking" id="isParking">
+                        <?php 
+                        
+                        $selectedOptionTrue = isset($_GET['isParking']) && $_GET['isParking'] === 'true' ? 'selected' : '';
+                            var_dump ($selectedOption);
+
+                        $selectedOptionFalse = isset($_GET['isParking']) && $_GET['isParking'] === 'false' ? 'selected' : '';   
+                        ?>
+
                         <option value="">-Vuoi il parcheggio-</option>
-                        <option value="true">Parcheggio</option>
-                        <option value="false">No parcheggio</option>
+                        <option <?php echo $selectedOptionTrue ?>  value="true">Parcheggio</option>
+                        <option <?php echo $selectedOptionFalse ?>   value="false">No parcheggio</option>
                     </select>
                 </div>
                 <div class="col">
                     <select class="form-select" name="vote" id="vote">
                         <option value="">-Voto Hotel-</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                       
+                        <?php for($i = 0; $i <= 5; $i++): ?>
+                        <option value="<?php echo $i ?>"<?php echo (isset($_GET['vote']) && $_GET['vote'] === strval($i)) ? 'selected' : ''; ?> ><?php echo $i ?></option>
+                        <!-- <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option value="5">5</option> -->
+                        <?php endfor; ?>
                     </select>
                 </div>
                 <div class="col">
