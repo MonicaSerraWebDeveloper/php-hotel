@@ -54,36 +54,55 @@
     <title>Php Hotel</title>
 </head>
 <body>
-    <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Descrizione</th>
-            <th scope="col">Parcheggio</th>
-            <th scope="col">Voto</th>
-            <th scope="col">Distanza dal centro</th>
-            </tr>
-        </thead>
-    <?php 
-        foreach ($hotels as $keys => $hotelKey) { ?> 
-            <tbody>
+    <div class="container-xl py-4">
+        <form method="GET" class="col">
+            <div class="row align-items-start">
+                <div class="col">
+                    <select class="form-select" name="isParking" id="isParking">
+                        <option value="">-Seleziona-</option>
+                        <option value="true">Parcheggio</option>
+                        <option value="false">No parcheggio</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Filtra</button>
+                </div>
+            </div>
+        </form>
+        <table class="table">
+            <thead>
                 <tr>
-                    <th scope="row"><?php echo $keys ?></th>
-                    <td><?php echo $hotelKey['name'] ?></td>
-                    <td><?php echo $hotelKey['description'] ?></td>
-                    <td><?php echo $hotelKey['parking'] ?></td>
-                    <td><?php echo $hotelKey['vote'] ?></td>
-                    <td><?php echo $hotelKey['distance_to_center'] ?></td>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Descrizione</th>
+                <th scope="col">Parcheggio</th>
+                <th scope="col">Voto</th>
+                <th scope="col">Distanza dal centro</th>
                 </tr>
-            </tbody>
-            <?php foreach ($hotelKey as $hotel) { ?> 
-                
-                   
-                
-        <?php  }
-    }?> 
-    </table>
-       
+            </thead>
+            <?php 
+                foreach ($hotels as $keys => $hotelKey) {
+                    if (isset($_GET['isParking'])) {
+                        if ($_GET['isParking'] === 'true' && $hotelKey['parking'] !== true) {
+                            continue;
+                        } elseif ($_GET['isParking'] === 'false' && $hotelKey['parking'] !== false) {
+                            continue;
+                        }
+                    }
+                    ?> 
+                    <tbody>
+                        <tr>
+                            <th scope="row"><?php echo $keys ?></th>
+                            <td><?php echo $hotelKey['name'] ?></td>
+                            <td><?php echo $hotelKey['description'] ?></td>
+                            <td><?php echo $hotelKey['parking'] ? 'Sì' : 'No' ?></td>
+                            <td><?php echo $hotelKey['vote'] ?></td>
+                            <td><?php echo $hotelKey['distance_to_center'] ?></td>
+                        </tr>
+                    </tbody>     
+                <?php  }
+            ?> 
+        </table>
+    </div>
 </body>
 </html>
