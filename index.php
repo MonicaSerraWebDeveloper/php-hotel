@@ -59,9 +59,19 @@
             <div class="row align-items-start">
                 <div class="col">
                     <select class="form-select" name="isParking" id="isParking">
-                        <option value="">-Seleziona-</option>
+                        <option value="">-Vuoi il parcheggio-</option>
                         <option value="true">Parcheggio</option>
                         <option value="false">No parcheggio</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select" name="vote" id="vote">
+                        <option value="">-Voto Hotel-</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
                 <div class="col">
@@ -82,25 +92,38 @@
             </thead>
             <?php 
                 foreach ($hotels as $keys => $hotelKey) {
-                    if (isset($_GET['isParking'])) {
+
+                    $shouldDisplay = true;
+
+                    if (isset($_GET['isParking']) && $_GET['isParking'] !== '') {
                         if ($_GET['isParking'] === 'true' && $hotelKey['parking'] !== true) {
-                            continue;
+                            $shouldDisplay = false;
                         } elseif ($_GET['isParking'] === 'false' && $hotelKey['parking'] !== false) {
-                            continue;
+                            $shouldDisplay = false;
                         }
                     }
+                    if (isset($_GET['vote']) && $_GET['vote'] !== '') {
+                        if (intval($_GET['vote']) !== $hotelKey['vote']) {
+                            $shouldDisplay = false;
+                        }
+                    }
+                    if ($shouldDisplay) { 
                     ?> 
-                    <tbody>
-                        <tr>
-                            <th scope="row"><?php echo $keys ?></th>
-                            <td><?php echo $hotelKey['name'] ?></td>
-                            <td><?php echo $hotelKey['description'] ?></td>
-                            <td><?php echo $hotelKey['parking'] ? 'Sì' : 'No' ?></td>
-                            <td><?php echo $hotelKey['vote'] ?></td>
-                            <td><?php echo $hotelKey['distance_to_center'] ?></td>
-                        </tr>
-                    </tbody>     
+                    
+                        <tbody>
+                            <tr>
+                                <th scope="row"><?php echo $keys ?></th>
+                                <td><?php echo $hotelKey['name'] ?></td>
+                                <td><?php echo $hotelKey['description'] ?></td>
+                                <td><?php echo $hotelKey['parking'] ? 'Sì' : 'No' ?></td>
+                                <td><?php echo $hotelKey['vote'] ?></td>
+                                <td><?php echo $hotelKey['distance_to_center'] ?></td>
+                            </tr>
+                        </tbody> 
+                      
                 <?php  }
+                
+                }
             ?> 
         </table>
     </div>
