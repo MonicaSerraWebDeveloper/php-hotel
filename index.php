@@ -54,13 +54,36 @@
     <title>Php Hotel</title>
 </head>
 <body>
-
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Descrizione</th>
+            <th scope="col">Parcheggio</th>
+            <th scope="col">Voto</th>
+            <th scope="col">Distanza dal centro</th>
+            </tr>
+        </thead>
     <?php 
-        foreach ($hotels as $hotelKey) { 
-            foreach ($hotelKey as $hotel) {?> 
-                <div> <?php echo $hotel ?></div>
-            <?php  }
+        foreach ($hotels as $keys => $hotelKey) { ?> 
+            <tbody>
+                <tr>
+                    <th scope="row"><?php echo $keys ?></th>
+                    <td><?php echo $hotelKey['name'] ?></td>
+                    <td><?php echo $hotelKey['description'] ?></td>
+                    <td><?php echo $hotelKey['parking'] ?></td>
+                    <td><?php echo $hotelKey['vote'] ?></td>
+                    <td><?php echo $hotelKey['distance_to_center'] ?></td>
+                </tr>
+            </tbody>
+            <?php foreach ($hotelKey as $hotel) { ?> 
+                
+                   
+                
+        <?php  }
     }?> 
+    </table>
        
 </body>
 </html>
