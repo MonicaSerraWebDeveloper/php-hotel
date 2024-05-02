@@ -78,10 +78,6 @@
                        
                         <?php for($i = 0; $i <= 5; $i++): ?>
                         <option value="<?php echo $i ?>"<?php echo (isset($_GET['vote']) && $_GET['vote'] === strval($i)) ? 'selected' : ''; ?> ><?php echo $i ?></option>
-                        <!-- <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option> -->
                         <?php endfor; ?>
                     </select>
                 </div>
