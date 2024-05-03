@@ -62,9 +62,9 @@
                         <?php 
                         
                         $selectedOptionTrue = isset($_GET['isParking']) && $_GET['isParking'] === 'true' ? 'selected' : '';
-                            var_dump ($selectedOption);
 
                         $selectedOptionFalse = isset($_GET['isParking']) && $_GET['isParking'] === 'false' ? 'selected' : '';   
+                        
                         ?>
 
                         <option value="">-Vuoi il parcheggio-</option>
@@ -77,7 +77,9 @@
                         <option value="">-Voto Hotel-</option>
                        
                         <?php for($i = 0; $i <= 5; $i++): ?>
+                            
                         <option value="<?php echo $i ?>"<?php echo (isset($_GET['vote']) && $_GET['vote'] === strval($i)) ? 'selected' : ''; ?> ><?php echo $i ?></option>
+                        
                         <?php endfor; ?>
                     </select>
                 </div>
